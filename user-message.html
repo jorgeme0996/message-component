@@ -5,10 +5,10 @@
   <template>
     <style>
       :host {
-        display: block;
+        display: flex;
+        flex-direction: column;
       }
       article {
-        background-color: #43A047;
         color: white;
         text-align: center;
         padding: 5px;
@@ -16,7 +16,7 @@
         word-break: break-all;
       }
     </style>
-    <article style$="width: [[cardsWidht]]px">
+    <article style$="width: [[cardsWidht]]px; background-color: [[cardColor]]; align-self: [[cardPosition]];">
       [[text]]
     </article>
   </template>
@@ -30,9 +30,21 @@
             type: String,
             value: ''
           },
+          from: {
+            type: String,
+            value:''
+          },
           cardsWidht: {
             type: Number,
             computed: '_cardWidht(text)'
+          },
+          cardColor: {
+            type: String,
+            computed: '_cardColor()'
+          },
+          cardPosition: {
+            type: String,
+            computed: '_cardPosition()'
           }
         };
       }
@@ -41,6 +53,23 @@
         const size = this.text.length*8;
         return size;
       }
+
+      _cardColor(){
+        if(this.from === 'user'){
+          return '#43A047';
+        } else if(this.from === 'bot'){
+          return '#1E88E5'
+        }
+      }
+
+      _cardPosition(){
+        if(this.from === 'user'){
+          return 'flex-end';
+        } else if(this.from === 'bot'){
+          return ''
+        }
+      }
+
     }
 
     window.customElements.define(UserMessage.is, UserMessage);
