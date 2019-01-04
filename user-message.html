@@ -1,0 +1,48 @@
+<link rel="import" href="../polymer/polymer-element.html">
+
+
+<dom-module id="user-message">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+      article {
+        background-color: #43A047;
+        color: white;
+        text-align: center;
+        padding: 5px;
+        max-width: 300px;
+        word-break: break-all;
+      }
+    </style>
+    <article style$="width: [[cardsWidht]]px">
+      [[text]]
+    </article>
+  </template>
+
+  <script>
+    class UserMessage extends Polymer.Element {
+      static get is() { return 'user-message'; }
+      static get properties() {
+        return {
+          text: {
+            type: String,
+            value: ''
+          },
+          cardsWidht: {
+            type: Number,
+            computed: '_cardWidht(text)'
+          }
+        };
+      }
+
+      _cardWidht(text){
+        const size = this.text.length*8;
+        return size;
+      }
+    }
+
+    window.customElements.define(UserMessage.is, UserMessage);
+  </script>
+</dom-module>
