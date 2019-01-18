@@ -16,7 +16,7 @@
         overflow-wrap: break-word;
       }
     </style>
-    <article style$="width: [[cardsWidht]]px; background-color: [[cardColor]]; align-self: [[cardPosition]];">
+    <article style$="background-color: [[cardColor]]; align-self: [[cardPosition]];">
       [[text]]
     </article>
   </template>
@@ -34,10 +34,6 @@
             type: String,
             value:''
           },
-          cardsWidht: {
-            type: Number,
-            computed: '_cardWidht(text)'
-          },
           cardColor: {
             type: String,
             computed: '_cardColor()'
@@ -47,11 +43,6 @@
             computed: '_cardPosition()'
           }
         };
-      }
-
-      _cardWidht(text){
-        const size = this.text.length*8;
-        return size;
       }
 
       _cardColor(){
@@ -66,7 +57,7 @@
         if(this.from === 'user'){
           return 'flex-end';
         } else if(this.from === 'bot'){
-          return ''
+          return 'flex-start'
         }
       }
 
